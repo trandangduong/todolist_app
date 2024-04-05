@@ -13,5 +13,9 @@
 
 // clone code ve
 // git clone https://github.com/trandangduong/todolist_app
-
-
+// add new directory for Android Studio
+// 1. Start Menu > Control Panel > System > Advanced System Settings (on the left) > Environment Variables
+// 2. Add a new user variable (at the top) that points your home user directory:
+// Variable name: ANDROID_SDK_HOME
+// Variable value: a path to a directory of your choice
+// 3. AVD Manager will use this directory to save its .android directory into it.
