@@ -23,7 +23,7 @@ extension ObPagePositionExtension on ObPagePosition {
       case ObPagePosition.page2:
         return "Create daily routine";
       case ObPagePosition.page3:
-        return "Orgonaize your tasks";
+        return "Organize your tasks";
     }
   }
 

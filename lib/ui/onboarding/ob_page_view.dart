@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todolist_app/ui/enums/ob_page_position.dart';
-import 'ob_child_page.dart';
+import 'package:todolist_app/enums/ob_page_position.dart';
+import 'package:todolist_app/ui/onboarding/ob_child_page.dart';
+import 'package:todolist_app/ui/welcome/welcome_page.dart';
 
 class OnboardingPageView extends StatefulWidget {
   const OnboardingPageView({super.key});
@@ -10,21 +11,61 @@ class OnboardingPageView extends StatefulWidget {
 }
 
 class _OnboardingPageViewState extends State<OnboardingPageView> {
+  final _pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        children: const [
+        controller: _pageController,
+        // physics: NeverScrollableScrollPhysics(),
+        children: [
           OnboardingChidPage(
             obPagePosition: ObPagePosition.page1,
+            nextOnPressed: () {
+              _pageController.jumpToPage(1);
+            },
+            backOnPressed: () {
+              // nothing
+            },
+            skipOnPressed: () {
+              _gotoWelcomePage();
+            },
           ),
           OnboardingChidPage(
             obPagePosition: ObPagePosition.page2,
+            nextOnPressed: () {
+              _pageController.jumpToPage(2);
+            },
+            backOnPressed: () {
+              _pageController.jumpToPage(0);
+            },
+            skipOnPressed: () {
+              _gotoWelcomePage();
+            },
           ),
           OnboardingChidPage(
             obPagePosition: ObPagePosition.page3,
+            nextOnPressed: () {
+              _gotoWelcomePage();
+            },
+            backOnPressed: () {
+              _pageController.jumpToPage(1);
+            },
+            skipOnPressed: () {
+              _gotoWelcomePage();
+            },
           ),
         ],
+      ),
+    );
+  }
+
+  void _gotoWelcomePage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const WelcomePage(),
       ),
     );
   }
