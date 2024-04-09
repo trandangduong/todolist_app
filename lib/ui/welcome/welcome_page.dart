@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todolist_app/ui/login_register/login_page.dart';
+import 'package:todolist_app/ui/login_register/register_page.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({
@@ -32,8 +34,8 @@ class WelcomePage extends StatelessWidget {
         children: [
           _buildTilte(),
           const Spacer(),
-          _buildLoginButton(),
-          _buildRegisterButton(),
+          _buildLoginButton(context),
+          _buildRegisterButton(context),
         ],
       ),
     );
@@ -74,14 +76,14 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildLoginButton() {
+  Widget _buildLoginButton(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 48,
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: ElevatedButton(
         onPressed: () {
-          // loginOnPressed();
+          _gotoLoginPage(context);
         },
         style: ElevatedButton.styleFrom(
             backgroundColor: const Color.fromRGBO(136, 117, 255, 1),
@@ -101,7 +103,7 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildRegisterButton() {
+  Widget _buildRegisterButton(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 48,
@@ -109,7 +111,7 @@ class WelcomePage extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 24),
       child: ElevatedButton(
         onPressed: () {
-          // registerOnPressed();
+          _gotoRegisterPage(context);
         },
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,
@@ -131,6 +133,24 @@ class WelcomePage extends StatelessWidget {
             color: Colors.white.withOpacity(0.87),
           ),
         ),
+      ),
+    );
+  }
+
+  void _gotoLoginPage(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginPage(),
+      ),
+    );
+  }
+
+  void _gotoRegisterPage(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const RegisterPage(),
       ),
     );
   }

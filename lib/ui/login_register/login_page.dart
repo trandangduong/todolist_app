@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todolist_app/ui/login_register/register_page.dart';
 
@@ -40,7 +38,7 @@ class LoginPage extends StatelessWidget {
               _buildDivider(),
               _buildGoogleLogin(),
               _buildAppleLogin(),
-              _buildRegister(context),
+              _buildDontHaveAcc(context),
             ],
           ),
         ),
@@ -56,7 +54,7 @@ class LoginPage extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 20),
       child: ElevatedButton(
         onPressed: () {
-          //
+          // go to Google login page
         },
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,
@@ -74,7 +72,7 @@ class LoginPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'icon_google_login.png',
+              'assets/images/icon_google_login.png',
               width: 24,
               height: 24,
               fit: BoxFit.fill,
@@ -104,7 +102,7 @@ class LoginPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: ElevatedButton(
         onPressed: () {
-          //
+          // go to Apple login page
         },
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,
@@ -122,7 +120,7 @@ class LoginPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'icon_apple_login.png',
+              'assets/images/icon_apple_login.png',
               width: 24,
               height: 24,
               fit: BoxFit.fill,
@@ -149,7 +147,8 @@ class LoginPage extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 48,
-      margin: const EdgeInsets.only(top: 70),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.only(top: 40),
       child: ElevatedButton(
         onPressed: null, //disable button
         style: ElevatedButton.styleFrom(
@@ -176,9 +175,9 @@ class LoginPage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
-      ).copyWith(top: 40),
+      ).copyWith(top: 16),
       child: Text(
-        'LOGIN',
+        'Login',
         style: TextStyle(
           fontSize: 32,
           fontWeight: FontWeight.bold,
@@ -193,7 +192,7 @@ class LoginPage extends StatelessWidget {
   Widget _buildInputUserAndPass() {
     return Form(
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +234,7 @@ class LoginPage extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
-              fillColor: const Color.fromRGBO(136, 117, 255, 1),
+              fillColor: const Color(0x0ff79797),
               filled: true,
             ),
             style: TextStyle(
@@ -277,7 +276,7 @@ class LoginPage extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
-              fillColor: const Color.fromRGBO(136, 117, 255, 1),
+              fillColor: const Color(0x0ff79797),
               filled: true,
             ),
             style: TextStyle(
@@ -294,7 +293,8 @@ class LoginPage extends StatelessWidget {
 
   Widget _buildDivider() {
     return Container(
-      margin: const EdgeInsets.only(top: 50, bottom: 50),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.only(top: 20, bottom: 20),
       child: Row(
         children: [
           Expanded(
@@ -324,13 +324,13 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _buildRegister(BuildContext context) {
+  Widget _buildDontHaveAcc(BuildContext context) {
     return Container(
       alignment: Alignment.center,
       margin: const EdgeInsets.only(top: 40, bottom: 20),
       child: RichText(
         text: TextSpan(
-          text: 'Dont have account',
+          text: 'Don not have account',
           style: TextStyle(
             fontSize: 12,
             fontFamily: GoogleFonts.lato().fontFamily,

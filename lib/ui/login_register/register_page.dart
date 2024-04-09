@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todolist_app/ui/login_register/login_page.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -35,8 +36,8 @@ class RegisterPage extends StatelessWidget {
               _buildInputUserAndPass(),
               _buildRegisterButton(),
               _buildDivider(),
-              _buildGoogleRegister(),
-              _buildAppleRegister(),
+              _buildGoogleLogin(),
+              _buildAppleLogin(),
               _buildLogin(context),
             ],
           ),
@@ -45,7 +46,7 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  Widget _buildGoogleRegister() {
+  Widget _buildGoogleLogin() {
     return Container(
       width: double.infinity,
       height: 48,
@@ -53,7 +54,7 @@ class RegisterPage extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 20),
       child: ElevatedButton(
         onPressed: () {
-          //
+          // go to Google page
         },
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,
@@ -71,7 +72,7 @@ class RegisterPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'icon_google_register.png',
+              'assets/images/icon_google_login.png',
               width: 24,
               height: 24,
               fit: BoxFit.fill,
@@ -94,14 +95,14 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  Widget _buildAppleRegister() {
+  Widget _buildAppleLogin() {
     return Container(
       width: double.infinity,
       height: 48,
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: ElevatedButton(
         onPressed: () {
-          //
+          // go to Apple page
         },
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,
@@ -119,7 +120,7 @@ class RegisterPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              'icon_apple_register.png',
+              'assets/images/icon_apple_login.png',
               width: 24,
               height: 24,
               fit: BoxFit.fill,
@@ -146,7 +147,8 @@ class RegisterPage extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 48,
-      margin: const EdgeInsets.only(top: 70),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.only(top: 40),
       child: ElevatedButton(
         onPressed: null, //disable button
         style: ElevatedButton.styleFrom(
@@ -173,7 +175,7 @@ class RegisterPage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 20,
-      ).copyWith(top: 40),
+      ).copyWith(top: 16),
       child: Text(
         'Register',
         style: TextStyle(
@@ -198,6 +200,8 @@ class RegisterPage extends StatelessWidget {
             _buildUsernameField(),
             const SizedBox(height: 25),
             _buildPassField(),
+            const SizedBox(height: 25),
+            _buildConfirmPassField(),
           ],
         ),
       ),
@@ -232,7 +236,7 @@ class RegisterPage extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
-              fillColor: const Color.fromRGBO(136, 117, 255, 1),
+              fillColor: const Color(0x0ff79797),
               filled: true,
             ),
             style: TextStyle(
@@ -274,7 +278,50 @@ class RegisterPage extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(4),
               ),
-              fillColor: const Color.fromRGBO(136, 117, 255, 1),
+              fillColor: const Color(0x0ff79797),
+              filled: true,
+            ),
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: GoogleFonts.lato().fontFamily,
+              color: Colors.white,
+            ),
+            obscureText: true, //hidden text
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildConfirmPassField() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Confirm Password:',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            fontFamily: GoogleFonts.lato().fontFamily,
+            color: Colors.white.withOpacity(0.87),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: 8),
+          child: TextFormField(
+            decoration: InputDecoration(
+              hintText: "Enter your confirm Password",
+              hintStyle: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                fontFamily: GoogleFonts.lato().fontFamily,
+                color: const Color(0xFF535353),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4),
+              ),
+              fillColor: const Color(0x0ff79797),
               filled: true,
             ),
             style: TextStyle(
@@ -291,7 +338,8 @@ class RegisterPage extends StatelessWidget {
 
   Widget _buildDivider() {
     return Container(
-      margin: const EdgeInsets.only(top: 50, bottom: 50),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.only(top: 20, bottom: 20),
       child: Row(
         children: [
           Expanded(
@@ -343,6 +391,7 @@ class RegisterPage extends StatelessWidget {
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
+                  // Navigator.pop(context);
                   _gotoLoginPage(context);
                 },
             ),
@@ -356,7 +405,7 @@ class RegisterPage extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const RegisterPage(),
+        builder: (context) => const LoginPage(),
       ),
     );
   }
