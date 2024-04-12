@@ -24,3 +24,8 @@
 
 // back to previous screen
 // Navigator.pop(context);
+
+// fix error image asset not found : flutter packages get
+
+// use: shared preferences plugin to save data user in memory phone.
+// flutter pub add shared_preferences

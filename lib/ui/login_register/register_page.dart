@@ -36,9 +36,9 @@ class RegisterPage extends StatelessWidget {
               _buildInputUserAndPass(),
               _buildRegisterButton(),
               _buildDivider(),
-              _buildGoogleLogin(),
-              _buildAppleLogin(),
-              _buildLogin(context),
+              _buildGoogleRegister(),
+              _buildAppleRegister(),
+              _buildHaveAcc(context),
             ],
           ),
         ),
@@ -46,7 +46,7 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  Widget _buildGoogleLogin() {
+  Widget _buildGoogleRegister() {
     return Container(
       width: double.infinity,
       height: 48,
@@ -95,7 +95,7 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  Widget _buildAppleLogin() {
+  Widget _buildAppleRegister() {
     return Container(
       width: double.infinity,
       height: 48,
@@ -369,7 +369,7 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-  Widget _buildLogin(BuildContext context) {
+  Widget _buildHaveAcc(BuildContext context) {
     return Container(
       alignment: Alignment.center,
       margin: const EdgeInsets.only(top: 40, bottom: 20),

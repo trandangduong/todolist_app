@@ -4,31 +4,34 @@ import 'package:todolist_app/ui/login_register/login_page.dart';
 import 'package:todolist_app/ui/login_register/register_page.dart';
 
 class WelcomePage extends StatelessWidget {
+  final bool isFirstTimeInstallApp;
   const WelcomePage({
     super.key,
-    // required this.loginOnPressed,
-    // required this.registerOnPressed,
+    required this.isFirstTimeInstallApp,
   });
-  // final VoidCallback loginOnPressed;
-  // final VoidCallback registerOnPressed;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      // Back button
       appBar: AppBar(
         backgroundColor: Colors.black,
-        leading: IconButton(
-          onPressed: () {
-            // back to previous screen
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back_ios_new_outlined,
-            size: 18,
-            color: Colors.white,
-          ),
-        ),
+        leading: isFirstTimeInstallApp
+            ? IconButton(
+                onPressed: () {
+                  // back to previous screen
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios_new_outlined,
+                  size: 18,
+                  color: Colors.white,
+                ),
+              )
+            : null,
       ),
       body: Column(
         children: [

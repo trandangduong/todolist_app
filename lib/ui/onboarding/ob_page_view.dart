@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todolist_app/enums/ob_page_position.dart';
 import 'package:todolist_app/ui/onboarding/ob_child_page.dart';
 import 'package:todolist_app/ui/welcome/welcome_page.dart';
@@ -29,6 +30,7 @@ class _OnboardingPageViewState extends State<OnboardingPageView> {
               // nothing
             },
             skipOnPressed: () {
+              _markOnboardingCompleted();
               _gotoWelcomePage();
             },
           ),
@@ -41,18 +43,21 @@ class _OnboardingPageViewState extends State<OnboardingPageView> {
               _pageController.jumpToPage(0);
             },
             skipOnPressed: () {
+              _markOnboardingCompleted();
               _gotoWelcomePage();
             },
           ),
           OnboardingChidPage(
             obPagePosition: ObPagePosition.page3,
             nextOnPressed: () {
+              _markOnboardingCompleted();
               _gotoWelcomePage();
             },
             backOnPressed: () {
               _pageController.jumpToPage(1);
             },
             skipOnPressed: () {
+              _markOnboardingCompleted();
               _gotoWelcomePage();
             },
           ),
@@ -65,8 +70,19 @@ class _OnboardingPageViewState extends State<OnboardingPageView> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const WelcomePage(),
+        builder: (context) => const WelcomePage(isFirstTimeInstallApp: true),
       ),
     );
+  }
+
+  Future<void> _markOnboardingCompleted() async {
+    try {
+      final SharedPreferences preferences =
+          await SharedPreferences.getInstance();
+      preferences.setBool("_isOnboardingCompleted", true);
+    } catch (e) {
+      print(e);
+      return;
+    }
   }
 }
