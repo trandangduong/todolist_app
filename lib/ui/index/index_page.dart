@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:todolist_app/main.dart';
+import 'package:todolist_app/ui/index/task/create_task_page.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({super.key});
@@ -27,48 +28,54 @@ class _IndexPageState extends State<IndexPage> {
       Container(
         color: Colors.red,
       ),
-      Container(
-        color: Colors.blue,
-      ),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: kColorScheme.onBackground,
       body: _pageAct.elementAt(_currentPageAct),
       bottomNavigationBar: _buildIndexFooter(),
-      floatingActionButton: Container(
-        width: 64,
-        height: 64,
-        decoration: BoxDecoration(
-          color: const Color(0xff8687e7),
-          borderRadius: BorderRadius.circular(32),
-        ),
-        child: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.add,
-            size: 30,
-            color: Colors.white,
-          ),
-        ),
-      ),
+      floatingActionButton: _addTaskButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
+  Widget _addTaskButton() {
+    return Container(
+      width: 64,
+      height: 64,
+      decoration: BoxDecoration(
+        color: const Color(0xff8687e7),
+        borderRadius: BorderRadius.circular(32),
+      ),
+      child: IconButton(
+        onPressed: _onCreateTask,
+        icon: const Icon(
+          Icons.add,
+          size: 30,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
   Widget _indexPage() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _buildIndexStatusBar(),
-        _buildIndexHeader(),
-        _buildIndexMiddle(),
-        _buildIndexContent(),
-      ],
+    return SafeArea(
+      child: Container(
+        margin: const EdgeInsets.only(top: 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _buildIndexStatusBar(),
+            _buildIndexHeader(),
+            _buildIndexMiddle(),
+            _buildIndexContent(),
+          ],
+        ),
+      ),
     );
   }
 
@@ -89,7 +96,6 @@ class _IndexPageState extends State<IndexPage> {
               text: 'Index',
               style: TextStyle(
                 fontSize: 20,
-                fontFamily: GoogleFonts.lato().fontFamily,
                 color: Colors.white.withOpacity(0.87),
               ),
             ),
@@ -114,7 +120,6 @@ class _IndexPageState extends State<IndexPage> {
             'What do you want to do today?',
             style: TextStyle(
               fontSize: 20,
-              fontFamily: GoogleFonts.lato().fontFamily,
               color: Colors.white.withOpacity(0.87),
             ),
           ),
@@ -122,7 +127,6 @@ class _IndexPageState extends State<IndexPage> {
             'Tap + to add your tasks',
             style: TextStyle(
               fontSize: 16,
-              fontFamily: GoogleFonts.lato().fontFamily,
               color: Colors.white.withOpacity(0.87),
             ),
           ),
@@ -134,76 +138,74 @@ class _IndexPageState extends State<IndexPage> {
   }
 
   Widget _buildIndexFooter() {
-    return BottomNavigationBar(
-      backgroundColor: const Color(0xff363636),
-      unselectedItemColor: Colors.black,
-      selectedItemColor: Colors.red,
-      type: BottomNavigationBarType.fixed,
-      currentIndex: _currentPageAct,
-      onTap: (index) {
-        setState(() {
-          _currentPageAct = index;
-        });
-      },
-      items: [
-        BottomNavigationBarItem(
-          icon: Image.asset(
-            'assets/images/home_1.png',
-            width: 24,
-            height: 24,
-            fit: BoxFit.fill,
-          ),
-          label: "Index",
-          backgroundColor: Colors.transparent,
-        ),
-        BottomNavigationBarItem(
-          icon: Image.asset(
-            'assets/images/calendar.png',
-            width: 24,
-            height: 24,
-            fit: BoxFit.fill,
-          ),
-          backgroundColor: Colors.transparent,
-          label: "Calendar",
-        ),
-        BottomNavigationBarItem(
-            icon: Container(
-              width: 64,
-              height: 64,
-              decoration: BoxDecoration(
-                color: const Color(0xff8687e7),
-                borderRadius: BorderRadius.circular(32),
-              ),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.add,
-                  size: 30,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            backgroundColor: Colors.transparent,
-            label: ""),
-        BottomNavigationBarItem(
+    return Container(
+      margin: const EdgeInsets.only(top: 8),
+      child: BottomNavigationBar(
+        backgroundColor: Colors.black,
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.red,
+        type: BottomNavigationBarType.fixed,
+        landscapeLayout: BottomNavigationBarLandscapeLayout.spread,
+        currentIndex: _currentPageAct,
+        onTap: (index) {
+          setState(() {
+            _currentPageAct = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/clock.png',
+              'assets/images/home_1.png',
+              width: 24,
+              height: 24,
+              fit: BoxFit.fill,
+            ),
+            label: "Index",
+            backgroundColor: Colors.transparent,
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/images/calendar.png',
               width: 24,
               height: 24,
               fit: BoxFit.fill,
             ),
             backgroundColor: Colors.transparent,
-            label: "Focuse"),
-        BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/images/user.png',
-              width: 24,
-              height: 24,
-              fit: BoxFit.fill,
-            ),
-            backgroundColor: Colors.transparent,
-            label: "Profile")
-      ],
+            label: "Calendar",
+          ),
+          //const BottomNavigationBarItem(icon: Text('')),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/images/clock.png',
+                width: 24,
+                height: 24,
+                fit: BoxFit.fill,
+              ),
+              backgroundColor: Colors.transparent,
+              label: "Focuse"),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/images/user.png',
+                width: 24,
+                height: 24,
+                fit: BoxFit.fill,
+              ),
+              backgroundColor: Colors.transparent,
+              label: "Profile")
+        ],
+      ),
+    );
+  }
+
+  void _onCreateTask() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) => const Padding(
+        padding: EdgeInsets.fromLTRB(24, 48, 24, 24),
+        child: NewTask(),
+      ),
+      backgroundColor: Colors.black,
     );
   }
 }

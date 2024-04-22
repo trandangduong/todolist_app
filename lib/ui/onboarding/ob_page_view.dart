@@ -81,7 +81,6 @@ class _OnboardingPageViewState extends State<OnboardingPageView> {
           await SharedPreferences.getInstance();
       preferences.setBool("_isOnboardingCompleted", true);
     } catch (e) {
-      print(e);
       return;
     }
   }

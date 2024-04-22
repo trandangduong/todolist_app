@@ -1,24 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:todolist_app/ui/catalogy/create_edit_catalogy.dart';
+import 'package:todolist_app/ui/index/index_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]).then(
+    (value) => runApp(const MyApp()),
+  );
 }
+
+var kColorScheme = ColorScheme.fromSeed(
+  seedColor: Colors.deepPurple,
+);
+var kDarkColorScheme = ColorScheme.fromSeed(
+  seedColor: const Color(0xff363636),
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'To do list App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: kColorScheme,
+        scaffoldBackgroundColor: kColorScheme.background,
+        appBarTheme: const AppBarTheme().copyWith(
+          backgroundColor: kColorScheme.onBackground,
+        ),
         useMaterial3: true,
         fontFamily: GoogleFonts.lato().fontFamily,
       ),
-      home: const CreateAndEditCata(),
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: kDarkColorScheme,
+        scaffoldBackgroundColor: kDarkColorScheme.background,
+        appBarTheme: const AppBarTheme().copyWith(
+          backgroundColor: kDarkColorScheme.onBackground,
+        ),
+      ),
+      home: const IndexPage(),
     );
   }
 }

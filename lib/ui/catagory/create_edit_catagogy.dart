@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todolist_app/ui/login_register/register_page.dart';
 
@@ -14,7 +12,7 @@ class CreateAndEditCata extends StatefulWidget {
 class _CreateAndEditCataState extends State<CreateAndEditCata> {
   final _nameCataTextController = TextEditingController();
   final List<Color> _colorCata = [];
-  Color? colorSelected;
+  Color? _colorSelected;
 
   @override
   void initState() {
@@ -41,12 +39,14 @@ class _CreateAndEditCataState extends State<CreateAndEditCata> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Column(children: [
-                _buildTilte(),
-                _buildInputCataName(),
-                _buildCataIcon(),
-                _buildCataListColor(),
-              ]),
+              child: Column(
+                children: [
+                  _buildTilte(),
+                  _buildInputCataName(),
+                  _buildCataIcon(),
+                  _buildCataListColor(),
+                ],
+              ),
             ),
             _buildCreateAndCancelButton(),
           ],
@@ -185,12 +185,12 @@ class _CreateAndEditCataState extends State<CreateAndEditCata> {
                 scrollDirection: Axis.horizontal,
                 itemCount: _colorCata.length,
                 itemBuilder: (context, index) {
-                  final color = _colorCata.elementAt(index);
-                  final isSelected = colorSelected == color;
+                  Color colorPick = _colorCata.elementAt(index);
+                  bool isSelected = _colorSelected == colorPick;
                   return GestureDetector(
                     onTap: () {
                       setState(() {
-                        colorSelected = color;
+                        _colorSelected = colorPick;
                       });
                     },
                     child: Container(
@@ -199,7 +199,7 @@ class _CreateAndEditCataState extends State<CreateAndEditCata> {
                       height: 36,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
-                        color: color,
+                        color: colorPick,
                       ),
                       child: isSelected ? const Icon(Icons.check) : null,
                     ),
@@ -234,7 +234,7 @@ class _CreateAndEditCataState extends State<CreateAndEditCata> {
           ),
           const Spacer(),
           ElevatedButton(
-            onPressed: _onTapCreatedCata, //disable button
+            onPressed: _onTapCreatedCata,
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF8687E7).withOpacity(1),
               shape: RoundedRectangleBorder(
